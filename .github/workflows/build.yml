@@ -2,7 +2,7 @@ name: Build and Package Minecraft Mod
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build:
