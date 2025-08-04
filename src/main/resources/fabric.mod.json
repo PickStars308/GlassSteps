@@ -6,8 +6,8 @@
   "description": "Adds glass slab to Minecraft",
   "authors": ["PickStars"],
   "contact": {
-    "homepage": "https://github.com/xinstudio/glasssteps",
-    "sources": "https://github.com/xinstudio/glasssteps"
+    "homepage": "https://xinstudio.top",
+    "sources": "https://github.com/PickStars308/GlassSteps/"
   },
   "license": "MIT",
   "icon": "assets/glasssteps/icon.png",

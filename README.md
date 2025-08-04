@@ -1,9 +1,9 @@
 # GlassSteps Mod
 
-A mod that adds glass steps to Minecraft.
+A mod that adds glass slab to Minecraft.
 
 ## Function
-- Add clear glass steps
+- Add clear glass slab
 - Available through synthesis
 - Completely transparent and does not block light
 
