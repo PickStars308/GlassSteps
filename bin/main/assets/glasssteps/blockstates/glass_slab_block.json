@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "glasssteps:block/glass_slab_block"
+    },
+    "type=top": {
+      "model": "glasssteps:block/glass_slab_block_top"
+    },
+    "type=double": {
+      "model": "glasssteps:block/glass_slab_block_double"
+    }
+  }
+}

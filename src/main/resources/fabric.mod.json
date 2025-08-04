@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "glasssteps",
+  "version": "${version}",
+  "name": "GlassSteps",
+  "description": "Adds glass slab to Minecraft",
+  "authors": ["PickStars"],
+  "contact": {
+    "homepage": "https://github.com/xinstudio/glasssteps",
+    "sources": "https://github.com/xinstudio/glasssteps"
+  },
+  "license": "MIT",
+  "icon": "assets/glasssteps/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "top.xinstudio.glasssteps.client.GlassStepsDataGenerator"
+    ],
+    "client": [
+      "top.xinstudio.glasssteps.client.GlassStepsClient"
+    ],
+    "main": [
+      "top.xinstudio.glasssteps.GlassSteps"
+    ]
+  },
+  "mixins": [
+    "glasssteps.mixins.json",
+    {
+      "config": "glasssteps.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
