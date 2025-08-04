@@ -3,28 +3,57 @@ name: Build and Package Minecraft Mod
 on:
   pull_request:
     branches: [ master ]
+  push:
+    tags:
+      - 'v*.*.*'  # 例如 v1.0.0、v2.3.1 等
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
-      with:
-        java-version: '17'
-        distribution: 'temurin'
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x ./gradlew
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
 
-    - name: Build with Gradle
-      run: ./gradlew build
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
 
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: GlassSteps-mod
-        path: build/libs/*.jar
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: GlassSteps-mod
+          path: build/libs/*.jar
+
+      # 以下步骤仅在 tag push 时运行（自动创建 Release 并上传 jar）
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/libs/*.jar
